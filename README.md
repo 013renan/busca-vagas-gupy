@@ -61,13 +61,13 @@ Antes de executar o código, certifique-se de ter os seguintes pré-requisitos i
 
 ## Observações
 
-O código utiliza sessões ativas no Selenium, permitindo a interação dinâmica com o site da Gupy.
+O código utiliza sessões ativas no Selenium, permitindo a interação dinâmica com o site da Gupy.<br>
 A implementação atual retorna apenas as vagas mais recentes, limitando a busca a um máximo de 10 vagas para cada termo pesquisado.
 
 ## Estrutura do Projeto
 
-`busca_vagas.py`: O código principal que realiza a busca de vagas.
-`requirements.txt`: Lista de dependências do projeto.
+`busca_vagas.py`: O código principal que realiza a busca de vagas.<br>
+`requirements.txt`: Lista de dependências do projeto.<br>
 `README.md`: Este arquivo com instruções sobre o projeto.
 
    
