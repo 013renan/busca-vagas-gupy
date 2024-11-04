@@ -13,10 +13,10 @@ Antes de executar o código, certifique-se de ter os seguintes pré-requisitos i
 
 1. Clone este repositório para o seu computador:
 
-   ```bash
-   git clone https://github.com/013renan/busca-vagas-gupy.git
-   cd busca-vagas-gupy
-   ```
+  ```bash
+  git clone https://github.com/013renan/busca-vagas-gupy.git
+  cd busca-vagas-gupy
+  ```
    
 2. Crie um ambiente virtual (opcional, mas recomendado):
 
@@ -61,14 +61,14 @@ Antes de executar o código, certifique-se de ter os seguintes pré-requisitos i
 
 ## Observações
 
->O código utiliza sessões ativas no Selenium, permitindo a interação dinâmica com o site da Gupy.
->A implementação atual retorna apenas as vagas mais recentes, limitando a busca a um máximo de 10 vagas para cada termo pesquisado.
+*O código utiliza sessões ativas no Selenium, permitindo a interação dinâmica com o site da Gupy.
+*A implementação atual retorna apenas as vagas mais recentes, limitando a busca a um máximo de 10 vagas para cada termo pesquisado.
 
 ## Estrutura do Projeto
 
->`busca_vagas.py`: O código principal que realiza a busca de vagas.
->`requirements.txt`: Lista de dependências do projeto.
->`README.md`: Este arquivo com instruções sobre o projeto.
+*`busca_vagas.py`: O código principal que realiza a busca de vagas.
+*`requirements.txt`: Lista de dependências do projeto.
+*`README.md`: Este arquivo com instruções sobre o projeto.
 
    
 
