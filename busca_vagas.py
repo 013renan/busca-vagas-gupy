@@ -13,7 +13,7 @@ service = Service(GeckoDriverManager().install())
 driver = webdriver.Firefox(service=service, options=options)
 
 # Lista de termos a serem pesquisados
-termos_pesquisa = ['analista de dados', 'analista bi']
+termos_pesquisa = ['frontend', 'desenvolvedor java']
 # Data mínima das vagas
 data_minima = datetime.strptime('01-11-2024', '%d-%m-%Y') 
 
