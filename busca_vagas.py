@@ -13,9 +13,11 @@ service = Service(GeckoDriverManager().install())
 driver = webdriver.Firefox(service=service, options=options)
 
 # Lista de termos a serem pesquisados
-termos_pesquisa = ['frontend', 'desenvolvedor java']
+termos_pesquisa = ['analista de dados', 'analista BI', 'analista power bi', 'cientista de dados']
 # Data mínima das vagas
 data_minima = datetime.strptime('01-11-2024', '%d-%m-%Y') 
+# Lista de termos indesejados (se vc quer vagas JR, remova marcações de SR, PL, etc)
+termos_indesejados = ['estágio', 'pleno', 'senior', 'sênior', 'pl', 'sr', 'especialista', 'trainee', 'II', 'III']
 
 vagas = []
 
@@ -46,14 +48,27 @@ for termo in termos_pesquisa:
                 "Termo de Pesquisa": termo               
             })
 
-# Ordenar as vagas pela data de publicação em ordem decrescente
-vagas = sorted(vagas, key=lambda x: datetime.strptime(x["Data de Publicação"], '%d/%m/%Y'), reverse=True)
+vagas_filtradas = []
+
+for vaga in vagas:
+    nome_vaga = vaga['Nome da Vaga']
+    deve_manter = True
+    
+    for termo in termos_indesejados:
+        if termo.lower() in nome_vaga.lower():
+            deve_manter = False
+            break  
+    
+    if deve_manter:
+        vagas_filtradas.append(vaga)
+
+vagas_filtradas = sorted(vagas_filtradas, key=lambda x: datetime.strptime(x["Data de Publicação"], '%d/%m/%Y'), reverse=True)
 
 with open("vagas.csv", "w", newline='', encoding="utf-8") as csvfile:
     fieldnames = ["Nome da Vaga", "Nome da Empresa", "Localização", "Modalidade", "Tipo de Contrato", "Data de Publicação", "Termo de Pesquisa"]
     writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
     writer.writeheader()
-    writer.writerows(vagas)
+    writer.writerows(vagas_filtradas)
 
 driver.quit()
 print("CSV criado com sucesso!")
