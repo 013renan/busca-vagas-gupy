@@ -13,7 +13,7 @@ service = Service(GeckoDriverManager().install())
 driver = webdriver.Firefox(service=service, options=options)
 
 # Lista de termos a serem pesquisados
-termos_pesquisa = ['analista de dados', 'analista BI', 'analista power bi', 'cientista de dados']
+termos_pesquisa = ['java', 'react', 'desenvolvedor', 'dev']
 # Data mínima das vagas
 data_minima = datetime.strptime('01-11-2024', '%d-%m-%Y') 
 # Lista de termos indesejados (se vc quer vagas JR, remova marcações de SR, PL, etc)
@@ -30,12 +30,25 @@ for termo in termos_pesquisa:
     for card in cards:
         nome_vaga = card.find_element(By.XPATH, ".//h3").text
         nome_empresa = card.find_element(By.XPATH, ".//p[contains(@class, 'sc-bBXxYQ')]").text
-        localizacao = driver.find_element(By.CSS_SELECTOR, "div[aria-label^='Local de trabalho']").text
-        modalidade = driver.find_element(By.CSS_SELECTOR, "div[aria-label^='Modelo de trabalho']").text
-        tipo_contrato = driver.find_element(By.CSS_SELECTOR, "div[aria-label^='Essa vaga é do tipo']").text
+        
+        try:
+            localizacao = card.find_element(By.CSS_SELECTOR, "div[aria-label^='Local de trabalho']").text
+        except:
+            localizacao = "Não informado"
+
+        try:
+            modalidade = card.find_element(By.CSS_SELECTOR, "div[aria-label^='Modelo de trabalho']").text
+        except:
+            modalidade = "Modalidade não especificada"
+
+        try:
+            tipo_contrato = card.find_element(By.CSS_SELECTOR, "div[aria-label^='Essa vaga é do tipo']").text
+        except:
+            tipo_contrato = "Tipo de contrato não especificado"
+        
         data_publicacao_texto = card.find_element(By.CSS_SELECTOR, "p.sc-bBXxYQ.eJcDNr.sc-d9e69618-0.iUzUdL").text
-        data_publicacao_str = data_publicacao_texto.split(": ")[1]  
-        data_publicacao = datetime.strptime(data_publicacao_str, '%d/%m/%Y')  
+        data_publicacao_str = data_publicacao_texto.split(": ")[1]
+        data_publicacao = datetime.strptime(data_publicacao_str, '%d/%m/%Y')
 
         if data_publicacao >= data_minima:
             vagas.append({
